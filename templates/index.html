@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WriteWise</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background: #f3f3f3;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .column {
+            width: 48%;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-top: 20px;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        textarea, .improved-text-box {
+            width: 100%;
+            min-height: 150px;
+            margin-bottom: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background: #0056b3;
+        }
+        
+        /* Add a simple fade in animation for the loading text */
+        @keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        .loading {
+            animation: fadein 2s;
+            font-family: 'Comic Sans MS', cursive, sans-serif; /* Add your desired font here */
+            font-size: 18px;
+            color: #007BFF;
+        }
+    </style>
+    <script>
+        function showLoadingText() {
+        // Get the improved text box
+        var improvedTextBox = document.getElementById('improved_text_box');
+
+        // Create a new paragraph element for the loading text
+        var loadingText = document.createElement('p');
+        loadingText.classList.add('loading');
+        loadingText.textContent = "Improving, it's going to be so much better...";
+
+        // Clear the improved text box and append the loading text
+        improvedTextBox.innerHTML = '';
+        improvedTextBox.appendChild(loadingText);
+        }
+    </script>
+</head>
+<body>
+    <h1>WriteWise</h1>
+    <div class="container">
+        <div class="column">
+            <h2>Input text:</h2>
+            <form action="/improve_text" method="post" onsubmit="showLoadingText()">
+                <textarea name="original_text" id="input_text" rows="10"></textarea>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        <div class="column">
+            <h2>Improved text:</h2>
+            <div id="improved_text_box" class="improved-text-box">
+                {% if improved_text %}
+                <p>{{ improved_text }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
