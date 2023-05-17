@@ -4,12 +4,12 @@ import os
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 
+load_dotenv()
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://oliviaflask:619150olivia@localhost/test_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-
-load_dotenv()
+openai.api_key = os.environ.get("OPENAI_API_KEY") 
 
 class Submission(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -23,8 +23,6 @@ class Submission(db.Model):
 @app.route('/')
 def index():
     return render_template('index.html')
-
-openai.api_key = os.environ.get("OPENAI_API_KEY") 
 
 @app.route('/improve_text', methods=['POST'])
 def improve_text():
