@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-openai.api_key = os.environ.get("OPENAI_API_KEY") 
+openai.api_key = os.environ['OPENAI_API_KEY']
 
 class Submission(db.Model):
     id = db.Column(db.Integer, primary_key=True)
