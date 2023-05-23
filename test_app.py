@@ -44,6 +44,8 @@ def test_call_openai_api():
         )
         assert result == 'better text'
 
+# if calling API for request, there's a mocking library for that 
+
 
 
 
